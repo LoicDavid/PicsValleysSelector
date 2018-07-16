@@ -36,7 +36,6 @@ public class Data {
         valleys.clear();
         String[] tab = inputFile.split("\\\\");
         this.inputFile.setValue(tab[tab.length - 1]);
-        System.out.println(this.inputFile);
         InputStream flux = new FileInputStream(inputFile);
         InputStreamReader in = new InputStreamReader(flux);
         BufferedReader buff = new BufferedReader(in);
