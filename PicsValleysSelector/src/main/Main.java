@@ -1,44 +1,39 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package main;
 
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import model.Data;
+import view.MainView;
 
 /**
  *
  * @author Loïc
  */
-public class main extends Application {
+public class Main extends Application {
     
     @Override
     public void start(Stage primaryStage) {
-        Button btn = new Button();
-        btn.setText("Say 'Hello World'");
-        btn.setOnAction(new EventHandler<ActionEvent>() {
-            
+        
+        Data data = new Data();
+        MainView mainView = new MainView(data);
+        
+        Scene scene = new Scene(mainView);
+        
+        primaryStage.setTitle("Pics and Valleys Selector");
+        primaryStage.setScene(scene);
+        primaryStage.setResizable(false);
+        primaryStage.sizeToScene();
+        primaryStage.show();
+        
+        data.inputFileProperty().addListener(new ChangeListener<String>() {
             @Override
-            public void handle(ActionEvent event) {
-                System.out.println("Hello World!");
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                primaryStage.setTitle(newValue + " - Pics and Valleys Selector");
             }
         });
-        
-        StackPane root = new StackPane();
-        root.getChildren().add(btn);
-        
-        Scene scene = new Scene(root, 300, 250);
-        
-        primaryStage.setTitle("Hello World!");
-        primaryStage.setScene(scene);
-        primaryStage.show();
     }
 
     /**
