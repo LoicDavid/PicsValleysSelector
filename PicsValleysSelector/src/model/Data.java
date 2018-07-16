@@ -32,6 +32,8 @@ public class Data {
     public void loadData(String inputFile) throws Exception {
         yList.clear();
         timeList.clear();
+        pics.clear();
+        valleys.clear();
         String[] tab = inputFile.split("\\\\");
         this.inputFile.setValue(tab[tab.length - 1]);
         System.out.println(this.inputFile);
@@ -62,7 +64,7 @@ public class Data {
         FileWriter fileWriter = new FileWriter(outputFile);
         BufferedWriter writer = new BufferedWriter(fileWriter);
         String header = "pics;;valleys\ntime;value;time;value\n";
-        writer.append(header);
+        writer.write(header);
         for (int i = 0; i < Math.max(pics.size(), valleys.size()); i++) {
             if (i >= pics.size()) {
                 writer.append(";;" + timeList.get(valleys.get(i)) + ";" + yList.get(valleys.get(i)) + "\n");
