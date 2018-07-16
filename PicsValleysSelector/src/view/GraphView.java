@@ -116,25 +116,13 @@ public class GraphView extends Pane {
             lines.add(line);
             getChildren().add(line);
         }
-        Platform.runLater(() -> {
-                for (int i = 0; i < tLabels.size(); i++) {
-                    Label lab = tLabels.get(i);
-                    lab.setLayoutX(tModelToView(tStep * i) - lab.getWidth() / 2);
-                    lab.setLayoutY(405);
-                }
-                for (int i = 0; i < yLabels.size(); i++) {
-                    Label lab = yLabels.get(i);
-                    lab.setLayoutX(45 - lab.getWidth());
-                    lab.setLayoutY(yModelToView(yStart + yStep * i) - lab.getHeight() / 2);
-                }
-            });
     }
     
     private void resetGraph() {
         resetCoordinatesSystem();
         resetDots();
     }
-    
+
     private void setCoordinatesSystem(double tMax, double yMin, double yMax) {
         
         double tm = (((int)tMax) / 5 + 1) * 5;
@@ -165,6 +153,19 @@ public class GraphView extends Pane {
             yGrads.add(line);
             yLabels.add(label);
             getChildren().addAll(line, label);
+        }
+        
+        for (int i = 0; i < tLabels.size(); i++) {
+            Label lab = tLabels.get(i);
+            lab.applyCss();
+            lab.setLayoutX(tModelToView(tStep * i) - lab.prefWidth(-1) / 2);
+            lab.setLayoutY(405);
+        }
+        for (int i = 0; i < yLabels.size(); i++) {
+            Label lab = yLabels.get(i);
+            lab.applyCss();
+            lab.setLayoutX(45 - lab.prefWidth(-1));
+            lab.setLayoutY(yModelToView(yStart + yStep * i) - lab.prefHeight(-1) / 2);
         }
 
     }
